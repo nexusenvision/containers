@@ -23,9 +23,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && a2enmod rewrite \
     && a2dissite 000-default.conf \
     && a2ensite winter-8080.conf
-echo $'first line \n\
-second line \n\
-third line' > /etc/nginx/nginx.conf
+
 RUN echo "ServerName 127.0.0.1 \n" \
     "Mutex posixsem\n" >> /etc/apache2/apache2.conf \
     && service apache2 restart

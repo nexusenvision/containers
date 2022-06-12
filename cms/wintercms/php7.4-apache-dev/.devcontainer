@@ -1,0 +1,30 @@
+{
+	"name": "PHP-WN",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": { 
+			"VARIANT": "7.4-apache-bullseye",
+			"NODE_VERSION": "lts/*"
+		}
+	},
+
+	"customizations": {
+		"vscode": {
+			"settings": { 
+				"php.validate.executablePath": "/usr/local/bin/php"
+			},
+			"extensions": [
+				"xdebug.php-debug",
+				"bmewburn.vscode-intelephense-client",
+				"mrmlnc.vscode-apache",
+				"mutantdino.resourcemonitor",
+				"GitHub.copilot",
+				"wintercms.winter-cms",
+				"eamodio.gitlens"
+			]
+		}
+	},
+	"forwardPorts": [8080],
+	"postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html && sudo service apache2 restart",
+	"remoteUser": "vscode"
+}

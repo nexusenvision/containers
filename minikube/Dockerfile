@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-bullseye
 
 # Enable new "BUILDKIT" mode for Docker CLI
-ENV DOCKER_BUILDKIT=0
+ENV DOCKER_BUILDKIT=1
 
 # Options
 ARG INSTALL_ZSH="true"

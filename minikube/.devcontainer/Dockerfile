@@ -28,13 +28,12 @@ RUN apt-get update \
     # Use Docker script from script library to set things up
     && /bin/bash /tmp/library-scripts/docker-in-docker-debian.sh "${ENABLE_NONROOT_DOCKER}" "${USERNAME}" "${USE_MOBY}" "${DOCKER_VERSION}" \
     # Clean up
+    && /bin/bash /tmp/library-scripts/kubectl-helm-debian.sh "latest" "latest" "latest" \
+    && mkdir -p /home/${USERNAME}/.minikube \
+    && chown ${USERNAME} /home/${USERNAME}/.minikube \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
 
 VOLUME [ "/var/lib/docker" ]
-
-RUN curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb \
-    && sudo dpkg -i minikube_latest_amd64.deb
-
 
 # Setting the ENTRYPOINT to docker-init.sh will start up the Docker Engine 
 # inside the container "overrideCommand": false is set in devcontainer.json. 

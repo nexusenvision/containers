@@ -33,8 +33,7 @@ RUN apt-get update \
 VOLUME [ "/var/lib/docker" ]
 
 RUN curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb \
-    && sudo dpkg -i minikube_latest_amd64.deb \
-    && minikube kubectl -- get po -A
+    && sudo dpkg -i minikube_latest_amd64.deb
 
 
 # Setting the ENTRYPOINT to docker-init.sh will start up the Docker Engine 

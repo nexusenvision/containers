@@ -1,6 +1,8 @@
 # Note: You can use any Debian/Ubuntu based image you want. 
 FROM mcr.microsoft.com/vscode/devcontainers/base:buster
 
+LABEL maintainer="Azahari Zaman"
+
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
 # [Option] Upgrade OS packages to their latest versions
@@ -29,6 +31,11 @@ RUN apt-get update \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
 
 VOLUME [ "/var/lib/docker" ]
+
+RUN curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb \
+    && sudo dpkg -i minikube_latest_amd64.deb \
+    && minikube kubectl -- get po -A
+
 
 # Setting the ENTRYPOINT to docker-init.sh will start up the Docker Engine 
 # inside the container "overrideCommand": false is set in devcontainer.json. 

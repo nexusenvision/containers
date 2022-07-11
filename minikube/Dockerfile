@@ -2,13 +2,13 @@
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-bullseye
 
 # Enable new "BUILDKIT" mode for Docker CLI
-ENV DOCKER_BUILDKIT=1
+ENV DOCKER_BUILDKIT=0
 
 # Options
 ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="false"
 ARG USE_MOBY="true"
-ARG USERNAME=vscode
+ARG USERNAME=vscodeff
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.

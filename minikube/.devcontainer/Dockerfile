@@ -35,7 +35,7 @@ RUN apt-get update \
     && chown ${USERNAME} /home/${USERNAME}/.minikube
 
 RUN cp /tmp/library-scripts/.bashrc_extra //home/${USERNAME}/.bashrc_extra \
-    && echo ". ~/.bashrc_extra" >> /home/${USERNAME}/.bashrc
+    && echo ". ~/.bashrc_extra" >> /home/${USERNAME}/.bashrc \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
 
 VOLUME [ "/var/lib/docker" ]

@@ -23,6 +23,8 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 COPY library-scripts/*.sh /tmp/library-scripts/
+COPY library-scripts/.bashrc_extra /tmp/library-scripts/
+
 RUN apt-get update \
     && /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
     # Use Docker script from script library to set things up
@@ -30,7 +32,10 @@ RUN apt-get update \
     # Clean up
     && /bin/bash /tmp/library-scripts/kubectl-helm-debian.sh "latest" "latest" "latest" \
     && mkdir -p /home/${USERNAME}/.minikube \
-    && chown ${USERNAME} /home/${USERNAME}/.minikube \
+    && chown ${USERNAME} /home/${USERNAME}/.minikube
+
+RUN cp /tmp/library-scripts/.bashrc_extra //home/${USERNAME}/.bashrc_extra \
+    && echo ". ~/.bashrc_extra" >> /home/${USERNAME}/.bashrc
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
 
 VOLUME [ "/var/lib/docker" ]

@@ -1,0 +1,6 @@
+alias kg="kubectl get"
+alias ka="kubectl apply -f"
+alias kd="kubectl describe"
+alias kx="kubectl delete"
+alias kga="kubectl get all"
+alias kgaa-"kubectl get all --all-namespaces"
